@@ -40,6 +40,8 @@ module.exports.singleBillingList = async (req, res) => {
 // get billingList
 module.exports.updateBilling = async (req, res) => {
     const billingId = req.params.id;
+    console.log(billingId,"billingId")
+    console.log(req.body,"req.body")
     const billingItem = await billing.findById(billingId)
     // res.send(billingItem)
     let updatedBilling = _.pick(req.body, ['name', 'email', 'phone', 'payableAmount']);

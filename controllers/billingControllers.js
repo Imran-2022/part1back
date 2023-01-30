@@ -13,6 +13,7 @@ module.exports.addBilling = async (req, res) => {
 
 // get billingList
 module.exports.billingList = async (req, res) => {
+    console.log(req.query)
     let limit = req.query.limit ? parseInt(req.query.limit) : 10;
     let page=req.query.currentPage?parseInt(req.query.currentPage):1;
     let skips=0;

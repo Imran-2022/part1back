@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { addBilling, billingList, updateBilling, deleteBilling, singleBillingList,billingListSearch } = require('../controllers/billingControllers');
+const { addBilling, billingList, updateBilling, deleteBilling, singleBillingList,billingListSearch,billingTotal } = require('../controllers/billingControllers');
 const { registerUser, loginUser } = require('../controllers/userControllers');
 const { authorize } = require('../middlewares/authorize');
 
@@ -11,6 +11,8 @@ router.route('/login')
 
 router.route('/billing-list')
     .get([authorize],billingList)
+router.route('/billing-list/total')
+    .get([authorize],billingTotal)
 
 router.route('/billing-list-search')
     .get([authorize],billingListSearch)

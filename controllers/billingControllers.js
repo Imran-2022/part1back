@@ -13,8 +13,16 @@ module.exports.addBilling = async (req, res) => {
 
 // get billingList
 module.exports.billingList = async (req, res) => {
+    let limit = req.query.limit ? parseInt(req.query.limit) : 10;
+    let page=req.query.currentPage?parseInt(req.query.currentPage):1;
+    let skips=0;
+    if(page>1){
+        skips=limit*(page-1)
+    }
     const billingList = await billing.find({})
         .sort({ createdAt: -1 })
+        .skip(skips)
+        .limit(limit)
     return res.status(200).send(billingList)
 
 }
@@ -61,4 +69,9 @@ module.exports.deleteBilling = async (req, res) => {
     const _id = req.params.id;
     await billing.deleteOne({ _id });
     return res.status(200).send("Deleted!")
+}
+// get billingList
+module.exports.billingTotal = async (req, res) => {
+    const total = await billing.count();
+    res.send({total})
 }

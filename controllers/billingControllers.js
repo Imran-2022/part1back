@@ -76,3 +76,11 @@ module.exports.billingTotal = async (req, res) => {
     const total = await billing.count();
     res.send({total})
 }
+
+
+// totalPaidBill
+
+module.exports.totalPaidBill=async(req,res)=>{
+    const total=await (await billing.find({})).map(dt=>dt.payableAmount).reduce((a, b) => a + b, 0)
+    res.send({total})
+}
